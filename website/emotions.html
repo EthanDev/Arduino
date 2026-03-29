@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Luminous Playground - Emotions Explorer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "error":"#b31b25","outline":"#73777b","surface":"#f3f7fb",
+                    "tertiary":"#705900","surface-container":"#e3e9ee",
+                    "surface-container-lowest":"#ffffff","primary-container":"#69bdff",
+                    "on-surface-variant":"#575c60","surface-container-highest":"#d7dee3",
+                    "on-primary-container":"#003857","outline-variant":"#a9aeb1",
+                    "on-surface":"#2a2f32","tertiary-container":"#f9d461",
+                    "on-tertiary-container":"#5c4900","background":"#f3f7fb",
+                    "primary":"#006093","on-secondary-container":"#265600",
+                    "secondary":"#306800","on-secondary":"#d6ffb6",
+                    "on-tertiary":"#fff2d4","on-background":"#2a2f32",
+                    "secondary-container":"#9eec69","surface-container-low":"#ecf1f6",
+                    "on-primary":"#ebf4ff","surface-container-high":"#dde3e8",
+                    "tertiary-fixed-dim":"#eac655","on-tertiary-fixed":"#463600",
+                    "error-container":"#fb5151",
+                },
+                fontFamily: { "headline":["Plus Jakarta Sans"],"body":["Be Vietnam Pro"],"label":["Be Vietnam Pro"] },
+                borderRadius: { "DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px" },
+            },
+        },
+    }
+</script>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body class="min-h-screen pb-32">
+
+<nav class="bg-blue-50/70 backdrop-blur-xl shadow-sm top-0 sticky z-50 w-full">
+  <div class="flex justify-between items-center w-full px-6 py-4 max-w-full">
+    <div class="flex items-center gap-4">
+      <a href="index.html" class="flex items-center gap-2 text-slate-400 hover:text-primary transition-colors">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </a>
+      <span class="text-2xl font-black text-tertiary tracking-tight font-['Plus_Jakarta_Sans']">Emotions Explorer</span>
+    </div>
+    <div class="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-full shadow-sm">
+      <span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">stars</span>
+      <span class="font-bold text-on-surface" id="sparkleCount">12 Sparkles</span>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-4xl mx-auto px-6 pt-10 space-y-10">
+
+  <!-- Check-in Section -->
+  <section class="fade-in-up">
+    <h1 class="text-4xl font-black text-headline text-on-surface mb-3">How Are You Feeling?</h1>
+    <p class="text-on-surface-variant text-lg font-medium mb-8">Tap an emotion to tell me how you're feeling right now.</p>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4" id="emotionGrid">
+      <button class="emotion-card flex flex-col items-center gap-3 bg-surface-container-low p-6 rounded-xl border-2 border-transparent hover:border-tertiary/30 transition-all" data-emotion="happy" onclick="selectEmotion(this)">
+        <span class="text-5xl">😊</span>
+        <span class="font-bold text-on-surface">Happy</span>
+      </button>
+      <button class="emotion-card flex flex-col items-center gap-3 bg-surface-container-low p-6 rounded-xl border-2 border-transparent hover:border-tertiary/30 transition-all" data-emotion="excited" onclick="selectEmotion(this)">
+        <span class="text-5xl">🤩</span>
+        <span class="font-bold text-on-surface">Excited</span>
+      </button>
+      <button class="emotion-card flex flex-col items-center gap-3 bg-surface-container-low p-6 rounded-xl border-2 border-transparent hover:border-tertiary/30 transition-all" data-emotion="calm" onclick="selectEmotion(this)">
+        <span class="text-5xl">😌</span>
+        <span class="font-bold text-on-surface">Calm</span>
+      </button>
+      <button class="emotion-card flex flex-col items-center gap-3 bg-surface-container-low p-6 rounded-xl border-2 border-transparent hover:border-tertiary/30 transition-all" data-emotion="sad" onclick="selectEmotion(this)">
+        <span class="text-5xl">😢</span>
+        <span class="font-bold text-on-surface">Sad</span>
+      </button>
+      <button class="emotion-card flex flex-col items-center gap-3 bg-surface-container-low p-6 rounded-xl border-2 border-transparent hover:border-tertiary/30 transition-all" data-emotion="angry" onclick="selectEmotion(this)">
+        <span class="text-5xl">😠</span>
+        <span class="font-bold text-on-surface">Angry</span>
+      </button>
+      <button class="emotion-card flex flex-col items-center gap-3 bg-surface-container-low p-6 rounded-xl border-2 border-transparent hover:border-tertiary/30 transition-all" data-emotion="scared" onclick="selectEmotion(this)">
+        <span class="text-5xl">😨</span>
+        <span class="font-bold text-on-surface">Scared</span>
+      </button>
+      <button class="emotion-card flex flex-col items-center gap-3 bg-surface-container-low p-6 rounded-xl border-2 border-transparent hover:border-tertiary/30 transition-all" data-emotion="confused" onclick="selectEmotion(this)">
+        <span class="text-5xl">😕</span>
+        <span class="font-bold text-on-surface">Confused</span>
+      </button>
+      <button class="emotion-card flex flex-col items-center gap-3 bg-surface-container-low p-6 rounded-xl border-2 border-transparent hover:border-tertiary/30 transition-all" data-emotion="proud" onclick="selectEmotion(this)">
+        <span class="text-5xl">🥳</span>
+        <span class="font-bold text-on-surface">Proud</span>
+      </button>
+      <button class="emotion-card flex flex-col items-center gap-3 bg-surface-container-low p-6 rounded-xl border-2 border-transparent hover:border-tertiary/30 transition-all" data-emotion="tired" onclick="selectEmotion(this)">
+        <span class="text-5xl">😴</span>
+        <span class="font-bold text-on-surface">Tired</span>
+      </button>
+      <button class="emotion-card flex flex-col items-center gap-3 bg-surface-container-low p-6 rounded-xl border-2 border-transparent hover:border-tertiary/30 transition-all" data-emotion="loved" onclick="selectEmotion(this)">
+        <span class="text-5xl">🥰</span>
+        <span class="font-bold text-on-surface">Loved</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Response Section (hidden initially) -->
+  <section id="emotionResponse" class="hidden bg-surface-container-lowest rounded-2xl shadow-lg p-8 border-l-8 border-tertiary">
+    <div class="flex items-start gap-6">
+      <div class="text-6xl" id="responseEmoji"></div>
+      <div>
+        <h2 class="text-2xl font-black text-headline text-on-surface mb-2" id="responseTitle"></h2>
+        <p class="text-on-surface-variant text-lg leading-relaxed mb-4" id="responseMessage"></p>
+        <div class="bg-tertiary-container/20 p-4 rounded-xl">
+          <p class="text-sm font-bold text-on-tertiary-container mb-1">Try this activity:</p>
+          <p class="text-on-surface font-medium" id="responseActivity"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mood Garden -->
+  <section class="bg-surface-container-lowest rounded-2xl shadow-sm p-8">
+    <h2 class="text-2xl font-black text-headline text-on-surface mb-2">Your Mood Garden</h2>
+    <p class="text-on-surface-variant mb-6">Watch your garden grow as you check in each day!</p>
+    <div class="grid grid-cols-7 gap-3" id="moodGarden">
+      <!-- Filled by JS -->
+    </div>
+    <div class="mt-6 flex items-center gap-4 text-sm text-on-surface-variant">
+      <span class="flex items-center gap-1"><span class="w-4 h-4 rounded bg-tertiary-container inline-block"></span> Today</span>
+      <span class="flex items-center gap-1"><span class="w-4 h-4 rounded bg-secondary-container inline-block"></span> Past days</span>
+      <span class="flex items-center gap-1"><span class="w-4 h-4 rounded bg-surface-container-high inline-block"></span> No check-in</span>
+    </div>
+  </section>
+
+  <!-- Breathing Exercise -->
+  <section class="bg-gradient-to-br from-primary-container/20 to-tertiary-container/20 rounded-2xl p-8 text-center">
+    <h2 class="text-2xl font-black text-headline text-on-surface mb-2">Calm Down Corner</h2>
+    <p class="text-on-surface-variant mb-8">Follow the circle to practice deep breathing.</p>
+    <div class="relative w-48 h-48 mx-auto mb-6">
+      <div id="breathCircle" class="w-48 h-48 rounded-full bg-primary/20 border-4 border-primary flex items-center justify-center transition-all duration-[4000ms] ease-in-out">
+        <span class="text-xl font-bold text-primary" id="breathText">Tap to Start</span>
+      </div>
+    </div>
+    <button id="breathBtn" onclick="toggleBreathing()" class="bg-primary text-on-primary font-bold px-8 py-3 rounded-full hover:scale-105 active:scale-95 transition-all">
+      Start Breathing
+    </button>
+  </section>
+
+</main>
+
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-white/80 backdrop-blur-2xl shadow-[0_-10px_40px_rgba(0,0,0,0.05)] rounded-t-[3rem]">
+  <a class="nav-tab flex flex-col items-center justify-center text-slate-400 px-6 py-2.5 hover:text-sky-500 transition-colors" href="index.html">
+    <span class="material-symbols-outlined text-2xl">home_app_logo</span>
+    <span class="font-['Be_Vietnam_Pro'] font-semibold text-xs tracking-wide mt-1">Home</span>
+  </a>
+  <a class="nav-tab flex flex-col items-center justify-center text-slate-400 px-6 py-2.5 hover:text-sky-500 transition-colors" href="stories.html">
+    <span class="material-symbols-outlined text-2xl">auto_stories</span>
+    <span class="font-['Be_Vietnam_Pro'] font-semibold text-xs tracking-wide mt-1">Stories</span>
+  </a>
+  <a class="nav-tab active flex flex-col items-center justify-center bg-sky-100 text-sky-800 rounded-[2rem] px-6 py-2.5 shadow-inner transition-all" href="emotions.html">
+    <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">mood</span>
+    <span class="font-['Be_Vietnam_Pro'] font-semibold text-xs tracking-wide mt-1">Emotions</span>
+  </a>
+  <a class="nav-tab flex flex-col items-center justify-center text-slate-400 px-6 py-2.5 hover:text-sky-500 transition-colors" href="games.html">
+    <span class="material-symbols-outlined text-2xl">videogame_asset</span>
+    <span class="font-['Be_Vietnam_Pro'] font-semibold text-xs tracking-wide mt-1">Games</span>
+  </a>
+</nav>
+
+<script src="app.js"></script>
+<script src="emotions.js"></script>
+</body>
+</html>
